@@ -1,19 +1,22 @@
 {
-  "name": "@seneca/config",
-  "version": "0.5.0",
-  "main": "dist/Config.js",
+  "name": "@seneca/calendar",
+  "version": "0.1.0",
+  "main": "dist/Calendar.js",
   "type": "commonjs",
-  "types": "dist/Config.d.ts",
-  "description": "Live configuration plugin for the Seneca framework.",
-  "homepage": "https://github.com/senecajs/SenecaConfig",
+  "types": "dist/Calendar.d.ts",
+  "description": "Calendar and notifications plugin for time-based maintenance events in Seneca.",
+  "homepage": "https://github.com/senecajs/Calendar",
   "keywords": [
     "seneca",
-    "Config"
+    "calendar",
+    "notifications",
+    "maintenance",
+    "reminders"
   ],
   "author": "Richard Rodger - richardrodger.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/senecajs/SenecaConfig.git"
+    "url": "git://github.com/senecajs/Calendar.git"
   },
   "scripts": {
     "prettier": "prettier --write .",
@@ -22,6 +25,7 @@
     "test-watch": "jest --coverage --watchAll",
     "watch": "tsc -w -d",
     "build": "tsc -d",
+    "prepare": "npm run build",
     "doc": "seneca-doc",
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm test",
@@ -33,10 +37,12 @@
   "files": [
     "dist",
     "src/**/*.ts",
-    "LICENSE"
+    "LICENSE",
+    "README.md",
+    "docs"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "devDependencies": {
     "@seneca/doc": "^8.0.0",
@@ -51,9 +57,8 @@
     "typescript": "^5.4.5"
   },
   "peerDependencies": {
-    "@seneca/entity-util": ">=3",
-    "seneca": ">=3||>=4.0.0-rc2",
-    "seneca-entity": ">=26",
-    "seneca-promisify": ">=3"
+    "seneca": ">=3.33.0",
+    "seneca-entity": ">=25",
+    "seneca-promisify": ">=3.7.1"
   }
 }
