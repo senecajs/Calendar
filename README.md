@@ -28,6 +28,7 @@ Requires Node `>=16`, Seneca `>=3.33`, `seneca-entity` `>=25`, and `seneca-promi
 | [How-to guide](docs/how-to.md)     | Doing: seeding, clock injection, delivery, tick, recurrence.                    |
 | [Reference](docs/reference.md)     | Looking up: options, entity fields, every `sys:calendar` message.               |
 | [Explanation](docs/explanation.md) | Understanding: due windows vs notify stages, calendar recurrence, pluggable IO. |
+| [Scope](docs/scope.md)             | Boundaries: what the plugin does not do, and which absences are decisions.      |
 
 ## Quick Example
 
