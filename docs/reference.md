@@ -2,7 +2,7 @@
 
 ## Options
 
-Validated against plugin `defaults` at registration (Seneca/gubu).
+Validated against plugin `defaults` at registration (Seneca 4 option shape).
 
 | Option | Default | Description |
 | ------ | ------- | ----------- |

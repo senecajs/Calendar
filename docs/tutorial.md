@@ -9,8 +9,7 @@ const Seneca = require('seneca')
 const Calendar = require('@seneca/calendar')
 
 const seneca = Seneca({ legacy: false })
-  .use('promisify')
-  .use('entity')
+  .use('@seneca/entity')
   .use(Calendar)
 ```
 

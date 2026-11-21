@@ -249,12 +249,11 @@ function Calendar(options) {
         }
         reply();
     });
-    seneca.add('role:seneca,cmd:close', function (msg, reply) {
+    seneca.destroy(function clearTick() {
         if (null != tickTimer) {
             clearInterval(tickTimer);
             tickTimer = null;
         }
-        this.prior(msg, reply);
     });
     async function deliverPayload(payload) {
         const seneca = this;
@@ -772,7 +771,7 @@ function Calendar(options) {
         };
     }
 }
-// Default options — Seneca validates plugin options against this shape (gubu).
+// Default options. Seneca 4 builds the option shape from these defaults.
 const defaults = {
     debug: false,
     canon: {
