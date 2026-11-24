@@ -15,10 +15,11 @@ the plugin does not hardcode email or UI.
 ## Install
 
 ```sh
-$ npm install @seneca/calendar
+$ npm install seneca@^4 @seneca/entity @seneca/calendar
 ```
 
-Requires Node `>=16`, Seneca `>=3.33`, `seneca-entity` `>=25`, and `seneca-promisify` `>=3.7.1`.
+Requires Node.js `>=24`, Seneca `^4.0.0` and `@seneca/entity` `^29.0.0`.
+Promises are built into Seneca 4, so `seneca-promisify` is not needed.
 `dist/` is committed; `prepare` runs `npm run build` for git installs.
 
 ## Documentation
@@ -38,9 +39,8 @@ const MS_DAY = 24 * 60 * 60 * 1000
 const due = Date.UTC(2026, 5, 1)
 
 const seneca = Seneca({ legacy: false })
-  .use('promisify')
-  .use('entity')
-  .use('calendar', {
+  .use('@seneca/entity')
+  .use('@seneca/calendar', {
     // Optional: inject a clock (useful in tests)
     // now: () => Date.now(),
   })
@@ -150,12 +150,14 @@ output and from `src/` via Jest. Documentation lives in `docs/` (Diátaxis).
 
 ```sh
 npm install
-npm i seneca seneca-promisify seneca-entity   # peer deps
 npm run build
 npm test
 ```
 
+`seneca` and `@seneca/entity` are development dependencies, so
+`npm install` brings them.
+
 ## Background
 
 Generated from the senecajs/SenecaConfig template; message namespace and entity
-model are calendar-specific. Compatible with Node 16+ (no `structuredClone`).
+model are calendar-specific. Requires Node.js 24 or later.

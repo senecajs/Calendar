@@ -18,8 +18,7 @@ describe('Calendar', () => {
     expect(CalendarDoc).toBeDefined()
     const seneca = Seneca({ legacy: false })
       .test()
-      .use('promisify')
-      .use('entity')
+      .use('@seneca/entity')
       .use(Calendar)
     await seneca.ready()
   })
@@ -674,15 +673,28 @@ describe('Calendar', () => {
 
 
   test('tick-clears-on-close', async () => {
-    const seneca = makeSeneca({
-      tick: { active: true, interval: 60_000 },
-    })
-    await seneca.ready()
+    const setSpy = jest.spyOn(global, 'setInterval')
+    const clearSpy = jest.spyOn(global, 'clearInterval')
 
-    await new Promise<void>((resolve, reject) => {
-      seneca.close((err: any) => (err ? reject(err) : resolve()))
-    })
-    expect(true).toBe(true)
+    try {
+      const seneca = makeSeneca({
+        tick: { active: true, interval: 60_000 },
+      })
+      await seneca.ready()
+
+      const i = setSpy.mock.calls.findIndex((call) => 60_000 === call[1])
+      expect(i).toBeGreaterThanOrEqual(0)
+      const timer = setSpy.mock.results[i].value
+      expect(clearSpy).not.toHaveBeenCalledWith(timer)
+
+      await new Promise<void>((resolve, reject) => {
+        seneca.close((err: any) => (err ? reject(err) : resolve()))
+      })
+      expect(clearSpy).toHaveBeenCalledWith(timer)
+    } finally {
+      setSpy.mockRestore()
+      clearSpy.mockRestore()
+    }
   })
 })
 
@@ -690,8 +702,7 @@ describe('Calendar', () => {
 function makeSeneca(opts: any = {}) {
   const seneca = Seneca({ legacy: false })
     .test()
-    .use('promisify')
-    .use('entity')
+    .use('@seneca/entity')
     .use(Calendar, opts)
   return seneca
 }

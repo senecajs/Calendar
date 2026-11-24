@@ -6,7 +6,7 @@ Operational deadlines — client-secret expiry, TLS renewal, token rotation — 
 
 ## Store-agnostic events
 
-Events are normal `seneca-entity` rows (default canon `sys/calendar`). Swap `mem-store` for Redis, SQL, or another store the same way as any other Seneca entity. The message API stays fixed.
+Events are normal `@seneca/entity` rows (default canon `sys/calendar`). Swap `mem-store` for Redis, SQL, or another store the same way as any other Seneca entity. The message API stays fixed.
 
 ## Due windows vs notify stages
 
